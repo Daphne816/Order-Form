@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Big Brain Bakery - Orders</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+	<link type="text/css" rel="stylesheet" href="css/bigbrain.css">
+	<script>
+		function getDate() {
+			var today = new Date();
+			var dd = today.getDate();
+			var mm = today.getMonth() + 1; //January is 0!
+			var yyyy = today.getFullYear();
+
+			if (dd < 10) {
+				dd = '0' + dd;
+			}
+
+			if (mm < 10) {
+				mm = '0' + mm;
+			} 
+    
+			today = yyyy + '-' + mm + '-' + dd;
+			nextYear = (yyyy+1) + '-' + mm + '-' + dd;
+			document.getElementById("pickupDate").setAttribute("min", today);
+			document.getElementById("pickupDate").setAttribute("value", today);
+			document.getElementById("pickupDate").setAttribute("max", nextYear);
+		}
+	</script>
+</head>
+<body onload="getDate()">
+	<div class="container">
+		<header class="ordershead">
+			<a id="skip" href="#content">Skip to Content</a>
+			<img src="images/logo.png" alt="big brain logo">
+			<h1><span class="pink">Big</span><span class="blue"> Brain</span><br><span class="bakery">Bakery</span></h1>
+		</header>
+		<div class="left-side">
+		</div>
+		<main id="orders">
+			<span id="content"></span>
+			<h1>Orders</h1>
+			<form class="cupcakeorder" id="cupcakeorder" method="post" action="https://webdevbasics.net/scripts/demo.php" autocomplete="on">
+				<h2>Custom Cupcakes</h2>
+				<fieldset class="orderinfo">
+					<legend>Order Information</legend>
+						<label for="pickupDate" class="pickupDate">Pickup Date: </label>
+							<input type="date" name="pickupDate" id="pickupDate" required="required">
+						<br>
+						<label for="quantity" class="quantity">Quantity: </label>
+							<input type="number" name="quantity" id="quantity" min="6" max="24" step="6" placeholder="Min. 6 &mdash; Max. 24" required="required">
+						<br>
+						<div class="formboxContainer">
+						<div class="basebox formbox">
+						 <span class="label base">Base: </span> 
+							<div class="choicebuttons">
+							<input type="radio" name="base" id="baseVanilla" value="vanilla" checked="checked">
+								<label for="baseVanilla" class="choice">Vanilla</label>
+							<input type="radio" name="base" id="baseChoco" value="chocolate">
+								<label for="baseChoco" class="choice">Chocolate</label>
+							<input type="radio" name="base" id="baseCarrot" value="carrot">
+								<label for="baseCarrot" class="choice">Carrot</label>
+							</div>
+						</div>
+						<div class="frostbox formbox">
+						 <span class="label frost">Frosting: </span> 
+							<div class="choicebuttons">
+							<input type="radio" name="frost" id="frostButter" value="buttercream" checked="checked">
+								<label for="frostButter" class="choice">Buttercream</label>
+							<input type="radio" name="frost" id="frostChoco" value="chocolate">
+								<label for="frostChoco" class="choice">Chocolate</label>
+							<input type="radio" name="frost" id="frostCheese" value="creamCheese">
+								<label for="frostCheese" class="choice">Cream Cheese</label>
+							</div>
+						</div>
+						<div class="fillbox formbox">
+						 <span class="label fill">Filling: </span> 
+							<div class="choicebuttons">
+							<input type="radio" name="fill" id="fillNone" value="none" checked="checked">
+								<label for="fillNone" class="choice">None</label>
+							<input type="radio" name="fill" id="fillCream" value="cream">
+								<label for="fillCream" class="choice">Bavarian Cream</label>
+							<input type="radio" name="fill" id="fillPb" value="pb">
+								<label for="fillPb" class="choice">Peanut Butter</label>
+							</div>
+					    </div>
+						<div class="extrasbox formbox">
+						 <span class="label extras">Extras: </span>
+						 <div class="choicechecks">
+							<input type="checkbox" name="sprinkles" id="sprinkles" class="sprinkles" value="yes">
+								<span class="choice sprinkles">Sprinkles</span>
+							<input type="checkbox" name="peanuts" id="peanuts" class="peanuts" value="yes">
+								<span class="choice peanuts">Peanuts</span>
+							<input type="checkbox" name="extraFrost" id="extraFrost" class="extraFrost" value="yes">
+								<span class="choice extraFrost">Extra Frosting</span>
+						 </div>
+						</div>
+						</div>
+						<span class="price">All extras &plus;25&cent;/each</span><br>
+						<label for="requests" class="requests">Special Requests: </label>
+							<textarea name="requests" id="requests" placeholder="Allergies, utensils, etc. Some requests may incur an extra fee."></textarea>
+				</fieldset>
+				<fieldset class="custinfo">
+					<legend>Customer Information</legend>
+					<p class="formreq">All fields are required.</p>
+						<label for="firstName">First Name: </label>
+							<input type="text" name="firstName" id="firstName" required="required">
+						<br>
+						<label for="lastName">Last Name: </label>
+							<input type="text" name="lastName" id="lastName" required="required">
+						<br>
+						<label for="email">E-mail: </label>
+							<input type="email" name="email" id="email" required="required">
+							<div class="input-validation"></div>
+						<br>
+						<label for="phone">Phone: </label>
+							<input type="tel" name="phone" id="phone" required="required" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="###-###-####">
+						<br>
+						<label for="contactPref" class="contactPref">Contact Preference: </label>
+							<select name="contactPref" id="contactPref" required="required"> 
+								<option label=" " selected="selected"></option>
+								<option value="email">E-mail</option>
+								<optgroup label="Phone">
+									<option value="call">Call</option>
+									<option value="text">Text</option>
+								</optgroup>
+							</select><br>
+				</fieldset>
+				<input type="submit" name="submit" id="submit" value="Submit">
+			</form>
+		</main>
+		<div class="right-side">
+			 <img src="images/carrotcupcake.png" alt="carrot cupcake with cream cheese frosting decal carrot decoration">
+			 <img src="images/chococupcake.png" alt="chocolate cupcake with chocolate frosting and colorful sprinkles">
+			 <img src="images/cake.png" alt="miniature yellow cake with chocolate frosting and a white flower decal">
+		</div>
+		<footer>	
+			<p>Copyright&copy; <time datetime="2021">2021 </time>Daphne Smith</p>
+		</footer>		
+	</div>
+</body>
+</html>
